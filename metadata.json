@@ -1,0 +1,5 @@
+{
+  "name": "ReplateIQ.ai",
+  "description": "A smart dietary assistant that generates recipes from available ingredients or dish names, calculates calories, and suggests healthy alternatives tailored to specific health goals like lowering triglycerides.",
+  "requestFramePermissions": []
+}
