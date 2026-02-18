@@ -2,7 +2,7 @@ import { SubscriptionTier } from '../types';
 
 export const SUBSCRIPTION_CONFIG = {
     FEES: {
-        LIFETIME_ACCESS: 5.00,
+        // LIFETIME_ACCESS: 5.00,
     },
     [SubscriptionTier.FREE]: {
         name: 'Eco-Seed',

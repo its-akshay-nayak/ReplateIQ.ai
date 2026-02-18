@@ -38,7 +38,7 @@ export const usePayment = () => {
             let displayName = '';
 
             if (tierName === 'lifetime') {
-                price = SUBSCRIPTION_CONFIG.FEES.LIFETIME_ACCESS;
+                price = SUBSCRIPTION_CONFIG.FEES?.LIFETIME_ACCESS || 0;
                 displayName = 'Lifetime Membership';
             } else {
                 const tierConfig = SUBSCRIPTION_CONFIG[tierName as SubscriptionTier];

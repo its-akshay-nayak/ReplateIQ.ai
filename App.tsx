@@ -4,13 +4,15 @@ import { UserProfile, ViewMode, Recipe, HealthGoal, MealType, CuisineType } from
 import { generateRecipeFromIngredients, analyzeDish } from './services/geminiService';
 import { useAuth } from './contexts/AuthContext';
 import AuthScreen from './components/AuthScreen';
+import { StatusBar, Style } from '@capacitor/status-bar';
+import { Capacitor } from '@capacitor/core';
 import ProfileSettings from './components/ProfileSettings';
 import RecipeCard from './components/RecipeCard';
 import CommunityHub from './components/CommunityHub';
 import LandingPage from './components/LandingPage';
 import EnterpriseDashboard from './components/EnterpriseDashboard';
 import ErrorBoundary from './components/common/ErrorBoundary';
-import LifetimeGate from './components/subscription/LifetimeGate';
+// import LifetimeGate from './components/subscription/LifetimeGate';
 import DevTools from './components/dev/DevTools';
 import { ChefHat, Search, User, Plus, X, Loader2, Sparkles, ScanLine, LogOut, Sun, Moon, Coffee, Sunset, Leaf, Star, LayoutDashboard, ChevronRight, Settings, Wallet, History, Globe, ChevronDown, ListPlus, AlertTriangle } from 'lucide-react';
 
@@ -27,6 +29,14 @@ const DEBUG_MODE = false;
 
 function App() {
   const { user, logout, isLoading: isAuthLoading, pendingOfferCount } = useAuth();
+
+  useEffect(() => {
+    if (Capacitor.isNativePlatform()) {
+      StatusBar.setStyle({ style: Style.Light });
+      StatusBar.setBackgroundColor({ color: '#FFFFFF' });
+      StatusBar.setOverlaysWebView({ overlay: false });
+    }
+  }, []);
 
   const [showLanding, setShowLanding] = useState(true);
   const [profile, setProfile] = useState<UserProfile>(INITIAL_PROFILE);
@@ -149,7 +159,7 @@ function App() {
 
   return (
     <div className="flex min-h-screen bg-gray-50 font-sans text-gray-900">
-      <LifetimeGate />
+      {/* <LifetimeGate /> */}
       {DEBUG_MODE && <DevTools />}
       <aside className="hidden md:flex flex-col w-72 bg-white border-r border-gray-200 h-screen sticky top-0 z-30 shadow-[4px_0_24px_rgba(0,0,0,0.02)]">
         <div className="p-8 pb-4"><div className="flex items-center gap-3 mb-2 cursor-pointer group" onClick={() => setView('pantry')}><div className="bg-emerald-600 text-white p-2.5 rounded-xl shadow-lg shadow-emerald-200 group-hover:scale-105 transition-transform"><ChefHat size={28} /></div><h1 className="text-xl font-extrabold tracking-tight text-emerald-950 group-hover:text-emerald-700 transition-colors">ReplateIQ.ai</h1></div><p className="text-xs text-gray-400 font-medium pl-1">Eat Smarter. Live Better.</p></div>
